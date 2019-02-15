@@ -38,6 +38,6 @@ void Dealer::FreeDeckMemory() {
 void Dealer::DisplayDeck() const {
 	deck->DisplayDeck();
 }
-Card Dealer::TopCardCopy() {
+Card& Dealer::TopCardCopy() {
 	return *deck->GetDeck().front();
 }

@@ -11,7 +11,7 @@ public:
 	//CanUseDeck Virtual methods
 	virtual void DealCards(Hand& _hand, int _cardstodeal);
 	virtual void ShuffleDeck();
-	virtual Card TopCardCopy();
+	virtual Card& TopCardCopy();
 	virtual void FreeDeckCardsMemory();
 	virtual void FreeDeckMemory();
 	virtual void DisplayDeck() const;

@@ -14,13 +14,15 @@ public:
 	void FreeAllMemoryOnHeap();
 	void DisplayTrumpSuit(bool _showrank) const;
 	void DisplayAllHands() const;
+	void DisplayCurPlayerHand(int _num);
+	int MinNumberConstraint(int _num,int _min,int _max);
 	//<---returns---->
 	int SetPlayerNumber(int* _arrnum);  
 private:
 	const int MAX_PLAYERS = 4;
 	Dealer m_playersArray[4];
-	int m_input;
+	unsigned short int m_input;
 	int m_dealerIndex;
-	Card m_Trumpsuit;
+	Card* m_Trumpsuit;
 };
 

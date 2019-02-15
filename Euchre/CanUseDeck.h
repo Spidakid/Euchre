@@ -10,7 +10,7 @@ public:
 	~CanUseDeck();
 	virtual void DealCards(Hand& _hand,int _cardstodeal) = 0;
 	virtual void ShuffleDeck() = 0;
-	virtual Card TopCardCopy() = 0;
+	virtual Card& TopCardCopy() = 0;
 	virtual void FreeDeckCardsMemory() = 0;
 	virtual void FreeDeckMemory() = 0;
 	virtual void DisplayDeck() const = 0;
