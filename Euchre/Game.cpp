@@ -24,19 +24,17 @@ void Game::Play()
 	//Shuffle Deck
 	m_playersArray[m_dealerIndex].ShuffleDeck();
 	
-	std::cout << "Player " << m_dealerIndex +1<< " is shuffling deck!"<< std::endl;
+	std::cout << "\t\t\t-----Player " << m_dealerIndex +1<< " is shuffling deck!-----"<< std::endl;
 	//Deal cards clockwise from dealer
 	StartingDeal();	
 	//Assigns copy of the top card to be a trump card 
 	m_Trumpsuit = m_playersArray[m_dealerIndex].TopCardCopy();
 
 	//Displays Trump Suit
-	DisplayTrumpSuit();
+	DisplayTrumpSuit(true);
 	//Displays all player hands
-	m_playersArray[m_playersArray[0].GetPlayerNumber()-1].DisplayHand();
-	m_playersArray[m_playersArray[1].GetPlayerNumber()-1].DisplayHand();
-	m_playersArray[m_playersArray[2].GetPlayerNumber()-1].DisplayHand();
-	m_playersArray[m_playersArray[3].GetPlayerNumber()-1].DisplayHand();
+	DisplayAllHands();
+
 	//Frees all memory on the heap
 	FreeAllMemoryOnHeap();
 }
@@ -55,6 +53,16 @@ void Game::InitPlayers(Deck& _deck) {
 	AssignPlayersOrder(p1);
 	AssignPlayersOrder(p2);
 	AssignPlayersOrder(p3);
+	//Assign Teams
+	for (size_t i = 0; i < MAX_PLAYERS; i++) {
+		if (i % 2 == 0) {
+			m_playersArray[i].Team = 'A';
+		}
+		else {
+			m_playersArray[i].Team = 'B';
+		}
+	}
+	
 }
 //Set number to player 
 int Game::SetPlayerNumber(int* _arrnum) {
@@ -136,12 +144,20 @@ void Game::FreeAllMemoryOnHeap() {
 	}
 }
 //Displays the Trump Card info
-void Game::DisplayTrumpSuit(){
-	std::cout << "<**Trump Suit**> \n\tRank: ";
-	m_Trumpsuit.DisplayRank();
-	std::cout << " Suit: ";
+void Game::DisplayTrumpSuit(bool _showrank) const{
+	if (_showrank) {
+		std::cout << "<**Trump Suit**> \n\tRank: ";
+		m_Trumpsuit.DisplayRank();
+		std::cout << "; ";
+	}
+	std::cout << "Suit: ";
 	m_Trumpsuit.DisplaySuit();
 	std::cout << std::endl;
 }
-
+//Displays all player hands
+void Game::DisplayAllHands() const {
+	for (size_t i = 0; i < MAX_PLAYERS;i++) {
+		m_playersArray[m_playersArray[i].GetPlayerNumber() - 1].DisplayHand();
+	}
+}
 

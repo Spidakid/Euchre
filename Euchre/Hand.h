@@ -20,11 +20,13 @@ public:
 	int GetPlayerNumber() const;
 
 	//static
-	static int turn;
+	static int s_turn;
 	//variables
 	bool isDealer;
+	char Team;
 protected:
 	std::vector<Card*> hand;
 	int m_player;
+	
 };
 

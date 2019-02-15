@@ -5,6 +5,7 @@ class Dealer: public CanUseDeck, public Hand
 {
 public:
 	Dealer();
+	Dealer(const Dealer& _dealer);
 	Dealer(Deck* _deck,int _player, bool _isdealer = false);
 	~Dealer();
 	//CanUseDeck Virtual methods

@@ -1,0 +1,5 @@
+﻿  Game.cpp
+c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(90): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Hand.cpp
+  Generating Code...
+  Euchre.vcxproj -> C:\Users\Spidakid\Documents\ReposGit\Euchre\x64\Debug\Euchre.exe

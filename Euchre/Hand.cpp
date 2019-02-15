@@ -15,9 +15,10 @@ Hand::Hand(int _playernumber,bool _isdealer)
 	}
 	isDealer = _isdealer;
 }
-int Hand::turn = 0;
+int Hand::s_turn = 0;
 Hand::Hand(const Hand& _hand) {
 	m_player = _hand.m_player;
+	Team = _hand.Team;
 }
 Hand::~Hand()
 {
@@ -28,7 +29,7 @@ void Hand::DisplayHand() const {
 	{
 		std::cout << "\tRank: ";
 		(*iter)->DisplayRank();
-		std::cout << " Suit: ";
+		std::cout << "; Suit: ";
 		(*iter)->DisplaySuit();
 		std::cout << std::endl;
 	}

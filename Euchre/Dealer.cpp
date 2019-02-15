@@ -10,6 +10,8 @@ Dealer::Dealer(Deck* _deck,int _player, bool _isdealer) : Hand(_player, _isdeale
 {
 	
 }
+Dealer::Dealer(const Dealer& _dealer) :Hand(_dealer){
+}
 Dealer::~Dealer()
 {
 }

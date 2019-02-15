@@ -12,7 +12,8 @@ public:
 	void StartingDeal();
 	void AssignPlayersOrder(Dealer& _player);
 	void FreeAllMemoryOnHeap();
-	void DisplayTrumpSuit();
+	void DisplayTrumpSuit(bool _showrank) const;
+	void DisplayAllHands() const;
 	//<---returns---->
 	int SetPlayerNumber(int* _arrnum);  
 private:
