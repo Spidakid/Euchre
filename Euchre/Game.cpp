@@ -33,7 +33,7 @@ void Game::Play()
 
 	//Choosing the Trump Card
 	ChoosingTrump();
-	
+	DisplayCurPlayerHand(MinNumberConstraint(m_dealerIndex + 2,1,MAX_PLAYERS));
 	//Frees all memory on the heap
 	FreeAllMemoryOnHeap();
 }
@@ -169,8 +169,8 @@ int Game::MinNumberConstraint(int _num, const int _min, const int _max) {
 	}
 	return _num;
 }
-void Game::DisplayCurPlayerHand(int _num) {
-	m_playersArray[MinNumberConstraint(_num - 1, 0, MAX_PLAYERS - 1)].DisplayHand();
+void Game::DisplayCurPlayerHand(int _playernum) {
+	m_playersArray[MinNumberConstraint(_playernum - 1, 0, MAX_PLAYERS - 1)].DisplayHand();
 }
 void Game::ChoosingTrump() {
 	for (size_t i = 0; i < MAX_PLAYERS; i++)
@@ -180,7 +180,7 @@ void Game::ChoosingTrump() {
 		std::cout << "Player " << Hand::s_turn << ", Would you like this to be the Trump?(1=Yes,2=No) ";
 		std::cin >> m_input;
 		if (m_input == 1) {
-			std::cout << "\nPlayer " << Hand::s_turn << " confirmed the Trump:\n";
+			std::cout << "\n\t\t\t-----Player " << Hand::s_turn << " confirmed the Trump-----\n";
 			DisplayTrumpSuit(true);
 			break;
 		}

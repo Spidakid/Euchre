@@ -24,7 +24,7 @@ Hand::~Hand()
 {
 }
 void Hand::DisplayHand() const {
-	std::cout << "Player "<< m_player<< ":"<<std::endl;
+	std::cout << "Player "<< m_player<< " Hand:"<<std::endl;
 	for (std::vector<Card*>::const_iterator iter = hand.begin();iter !=hand.end();++iter)
 	{
 		std::cout << "\tRank: ";
