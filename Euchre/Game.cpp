@@ -29,20 +29,10 @@ void Game::Play()
 	//Deal cards clockwise from dealer
 	StartingDeal();	
 	//Assigns the top card to be a trump card 
-	m_Trumpsuit = &m_playersArray[m_dealerIndex].TopCardCopy();
+	m_Trumpcard = &m_playersArray[m_dealerIndex].TopCardCopy();
 
 	//Choosing the Trump Card
-	for (size_t i = 0; i < MAX_PLAYERS; i++)
-	{
-		DisplayCurPlayerHand(Hand::s_turn);
-		DisplayTrumpSuit(true);
-		std::cout << "Player " << Hand::s_turn << ", Would you like this to be the Trump?(1=Yes,2=No) ";
-		std::cin >> m_input;
-		if (m_input == 1) {
-			break;
-		}
-		Hand::s_turn = MinNumberConstraint(++Hand::s_turn, 1, MAX_PLAYERS);
-	}
+	ChoosingTrump();
 	
 	//Frees all memory on the heap
 	FreeAllMemoryOnHeap();
@@ -157,11 +147,14 @@ void Game::DisplayTrumpSuit(bool _showrank) const{
 	std::cout << "The Trump is:\n";
 	if (_showrank) {
 		std::cout << "\tRank: ";
-		m_Trumpsuit->DisplayRank();
+		m_Trumpcard->DisplayRank();
 		std::cout << "; ";
 	}
+	else {
+		std::cout << "\t";
+	}
 	std::cout << "Suit: ";
-	m_Trumpsuit->DisplaySuit();
+	m_Trumpcard->DisplaySuit();
 	std::cout << std::endl;
 }
 //Displays all player hands
@@ -170,7 +163,7 @@ void Game::DisplayAllHands() const {
 		m_playersArray[m_playersArray[i].GetPlayerNumber() - 1].DisplayHand();
 	}
 }
-int Game::MinNumberConstraint(int _num, int _min,int _max) {
+int Game::MinNumberConstraint(int _num, const int _min, const int _max) {
 	if (_num < _min || _num >_max) {
 		return _num = _min;
 	}
@@ -179,5 +172,22 @@ int Game::MinNumberConstraint(int _num, int _min,int _max) {
 void Game::DisplayCurPlayerHand(int _num) {
 	m_playersArray[MinNumberConstraint(_num - 1, 0, MAX_PLAYERS - 1)].DisplayHand();
 }
-
-
+void Game::ChoosingTrump() {
+	for (size_t i = 0; i < MAX_PLAYERS; i++)
+	{
+		DisplayCurPlayerHand(Hand::s_turn);
+		DisplayTrumpSuit(true);
+		std::cout << "Player " << Hand::s_turn << ", Would you like this to be the Trump?(1=Yes,2=No) ";
+		std::cin >> m_input;
+		if (m_input == 1) {
+			std::cout << "\nPlayer " << Hand::s_turn << " confirmed the Trump:\n";
+			DisplayTrumpSuit(true);
+			break;
+		}
+		Hand::s_turn = MinNumberConstraint(++Hand::s_turn, 1, MAX_PLAYERS);
+	}
+	if (m_input == 2) {
+		std::cout << "The Dealer Team <--Team " << m_playersArray[m_dealerIndex].Team << "--> has confirmed the Trump:" << std::endl;
+		DisplayTrumpSuit(false);
+	}
+}

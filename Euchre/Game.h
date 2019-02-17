@@ -15,7 +15,8 @@ public:
 	void DisplayTrumpSuit(bool _showrank) const;
 	void DisplayAllHands() const;
 	void DisplayCurPlayerHand(int _num);
-	int MinNumberConstraint(int _num,int _min,int _max);
+	int MinNumberConstraint(int _num,const int _min, const int _max);
+	void ChoosingTrump();
 	//<---returns---->
 	int SetPlayerNumber(int* _arrnum);  
 private:
@@ -23,6 +24,6 @@ private:
 	Dealer m_playersArray[4];
 	unsigned short int m_input;
 	int m_dealerIndex;
-	Card* m_Trumpsuit;
+	Card* m_Trumpcard;
 };
 

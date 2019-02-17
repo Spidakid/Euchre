@@ -33,6 +33,7 @@ void Hand::DisplayHand() const {
 		(*iter)->DisplaySuit();
 		std::cout << std::endl;
 	}
+	std::cout << "<--TEAM " << Team << "-->"<<std::endl;
 	if (isDealer) {
 		std::cout << "*[Dealer]>" << std::endl;
 	}
