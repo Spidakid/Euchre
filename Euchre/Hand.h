@@ -15,7 +15,7 @@ public:
 	void AddCard(Card* _card);
 	void FreeHandCardsMemory();
 	//returns
-	Card* PlayCard(int _cardpos);
+	Card* PlayCard(int _cardpos,bool _wanttodiscard = false);
 	std::vector<Card*>& GetHand();
 	int GetPlayerNumber() const;
 	

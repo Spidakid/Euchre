@@ -32,9 +32,14 @@ void Game::Play()
 
 	//Choosing the Trump Card
 	ChoosingTrump();
-	DisplayCurPlayerHand(MinNumberConstraint(m_dealerIndex + 2,1,MAX_PLAYERS));
-	//Frees all memory on the heap
-	FreeAllMemoryOnHeap();
+	//Set Turn to next player after Dealer
+	Hand::s_turn = MinNumberConstraint(m_dealerIndex + 2, 1, MAX_PLAYERS);
+
+	//Start Of Game Loop
+	DisplayCurPlayerHand(MinNumberConstraint(Hand::s_turn,1,MAX_PLAYERS));
+
+	//Frees all memory on the heap[TODO FIX]
+	//FreeAllMemoryOnHeap();
 }
 //Initialize Players
 void Game::InitPlayers(Deck& _deck) {
@@ -138,6 +143,7 @@ void Game::FreeAllMemoryOnHeap() {
 	//Free Memory of cards in all hands
 	for (size_t i = 0; i < MAX_PLAYERS; i++)
 	{
+		//[FIX::]Shoots up to 2MB and doesn't play rest of script
 		m_playersArray[i].FreeHandCardsMemory();
 	}
 }
@@ -172,22 +178,32 @@ void Game::DisplayCurPlayerHand(int _playernum) {
 	m_playersArray[MinNumberConstraint(_playernum - 1, 0, MAX_PLAYERS - 1)].DisplayHand();
 }
 void Game::ChoosingTrump() {
+	bool firstBidPass = false;
 	for (size_t i = 0; i < MAX_PLAYERS; i++)
 	{
 		DisplayCurPlayerHand(Hand::s_turn);
 		DisplayTrumpSuit(true);
 		std::cout << "Player " << Hand::s_turn << ", Would you like this to be the Trump?\n";
 		if (m_playersArray[Hand::s_turn - 1].TrumpThreshold(m_Trumpcard.GetSuit())) {
-			std::cout << "\n\t\t\t-----Player " << Hand::s_turn << " confirmed the Trump-----\n";
-			DisplayTrumpSuit(true);
+			std::cout << "\n\t\t\t-----Player " << Hand::s_turn << " confirmed the Trump-----"<<std::endl;
+			srand(time(0));
+			std::cout << "\t\t-----Player " << m_dealerIndex + 1 << " is replacing a card w/ the Trump-----"<<std::endl;
+			m_playersArray[m_dealerIndex].PlayCard(rand() % 4 + 1,true);
+			m_playersArray[m_dealerIndex].AddCard(&m_Trumpcard);
+			DisplayTrumpSuit(false);
 			break;
 		}
 		else {
 			std::cout<< "\t\t\t-----I'll Pass!-----"<< std::endl;
+			if (i == 3) {
+				firstBidPass = true;
+			}
 		}
+		//Set Next Player's Turn
 		Hand::s_turn = MinNumberConstraint(++Hand::s_turn, 1, MAX_PLAYERS);
 	}
-	if (m_playersArray[m_dealerIndex].isDealer && !m_playersArray[m_dealerIndex].TrumpThreshold(m_Trumpcard.GetSuit())) {
+	if (firstBidPass) 
+	{
 		std::cout << "The Dealer Team <--Team " << m_playersArray[m_dealerIndex].Team << "--> has confirmed the Trump:" << std::endl;
 		m_Trumpcard.SetSuit(m_playersArray[m_dealerIndex].FavoredSuit());
 		DisplayTrumpSuit(false);

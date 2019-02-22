@@ -38,7 +38,8 @@ void Hand::DisplayHand() const {
 		std::cout << "*[Dealer]>" << std::endl;
 	}
 }
-Card* Hand::PlayCard(int _cardpos) {
+//Starting at 1
+Card* Hand::PlayCard(int _cardpos,bool _wanttodiscard) {
 	if (!hand.empty()) {
 		Card* playcard = hand[_cardpos-1];
 		if (hand.size() > 1) {
@@ -48,6 +49,11 @@ Card* Hand::PlayCard(int _cardpos) {
 			
 		}
 		hand.pop_back();
+		if (_wanttodiscard) {
+			delete playcard;
+			playcard = 0;
+			return 0;
+		}
 		return playcard;
 	}
 	return 0;
