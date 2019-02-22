@@ -70,3 +70,6 @@ void Card::DisplaySuit() const {
 		break;
 	}
 }
+void Card::SetSuit(Card::suitType _type) {
+	m_suit = _type;
+}

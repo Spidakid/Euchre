@@ -15,5 +15,15 @@ public:
 	virtual void FreeDeckCardsMemory();
 	virtual void FreeDeckMemory();
 	virtual void DisplayDeck() const;
+	//bool functions
+	bool TrumpThreshold(Card::suitType _trump);
+	//CardSuit functions
+	Card::suitType FavoredSuit();
+private:
+	int m_SpadesTrump();
+	int m_DiamondsTrump();
+	int m_HeartsTrump();
+	int m_ClubsTrump();
+	
 };
 

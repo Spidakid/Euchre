@@ -1,5 +1,6 @@
-﻿  Game.cpp
-c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(89): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  Hand.cpp
+﻿  Dealer.cpp
+  Game.cpp
+c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(88): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...
   Euchre.vcxproj -> C:\Users\Spidakid\Documents\ReposGit\Euchre\x64\Debug\Euchre.exe

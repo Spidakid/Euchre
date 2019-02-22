@@ -22,8 +22,8 @@ public:
 private:
 	const int MAX_PLAYERS = 4;
 	Dealer m_playersArray[4];
-	unsigned short int m_input;
+	unsigned short int m_dealerchoice;
 	int m_dealerIndex;
-	Card* m_Trumpcard;
+	Card m_Trumpcard;
 };
 

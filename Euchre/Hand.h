@@ -18,7 +18,7 @@ public:
 	Card* PlayCard(int _cardpos);
 	std::vector<Card*>& GetHand();
 	int GetPlayerNumber() const;
-
+	
 	//static
 	static int s_turn;
 	//variables
@@ -27,6 +27,5 @@ public:
 protected:
 	std::vector<Card*> hand;
 	int m_player;
-	
 };
 

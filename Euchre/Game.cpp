@@ -4,7 +4,7 @@
 #include "Hand.h"
 #include "Dealer.h"
 #include <iostream>
-
+#include <time.h>
 Game::Game()
 {
 }
@@ -14,10 +14,9 @@ Game::~Game()
 void Game::Play()
 {
 	Deck *deck = new Deck();
+	srand(time(0));
 	std::cout << "\t\t\t\t<Welcome to a game of Euchre!>\n\n";
-	std::cout << "Which player wants to be dealer?(1-4) ";
-	
-	std::cin >> m_input;
+	m_dealerchoice = rand() % 3 + 1;
 	//init players
 	InitPlayers(*deck); 
 	SetDealerIndex();
@@ -29,7 +28,7 @@ void Game::Play()
 	//Deal cards clockwise from dealer
 	StartingDeal();	
 	//Assigns the top card to be a trump card 
-	m_Trumpcard = &m_playersArray[m_dealerIndex].TopCardCopy();
+	m_Trumpcard = m_playersArray[m_dealerIndex].TopCardCopy();
 
 	//Choosing the Trump Card
 	ChoosingTrump();
@@ -40,7 +39,7 @@ void Game::Play()
 //Initialize Players
 void Game::InitPlayers(Deck& _deck) {
 	// init Dealer
-	Dealer dealer(&_deck,m_input, true);
+	Dealer dealer(&_deck,m_dealerchoice, true);
 	int playerNumbers[4];
 	playerNumbers[dealer.GetPlayerNumber() - 1] = dealer.GetPlayerNumber();
 	m_playersArray[dealer.GetPlayerNumber() - 1] = dealer;
@@ -147,14 +146,14 @@ void Game::DisplayTrumpSuit(bool _showrank) const{
 	std::cout << "The Trump is:\n";
 	if (_showrank) {
 		std::cout << "\tRank: ";
-		m_Trumpcard->DisplayRank();
+		m_Trumpcard.DisplayRank();
 		std::cout << "; ";
 	}
 	else {
 		std::cout << "\t";
 	}
 	std::cout << "Suit: ";
-	m_Trumpcard->DisplaySuit();
+	m_Trumpcard.DisplaySuit();
 	std::cout << std::endl;
 }
 //Displays all player hands
@@ -177,17 +176,20 @@ void Game::ChoosingTrump() {
 	{
 		DisplayCurPlayerHand(Hand::s_turn);
 		DisplayTrumpSuit(true);
-		std::cout << "Player " << Hand::s_turn << ", Would you like this to be the Trump?(1=Yes,2=No) ";
-		std::cin >> m_input;
-		if (m_input == 1) {
+		std::cout << "Player " << Hand::s_turn << ", Would you like this to be the Trump?\n";
+		if (m_playersArray[Hand::s_turn - 1].TrumpThreshold(m_Trumpcard.GetSuit())) {
 			std::cout << "\n\t\t\t-----Player " << Hand::s_turn << " confirmed the Trump-----\n";
 			DisplayTrumpSuit(true);
 			break;
 		}
+		else {
+			std::cout<< "\t\t\t-----I'll Pass!-----"<< std::endl;
+		}
 		Hand::s_turn = MinNumberConstraint(++Hand::s_turn, 1, MAX_PLAYERS);
 	}
-	if (m_input == 2) {
+	if (m_playersArray[m_dealerIndex].isDealer && !m_playersArray[m_dealerIndex].TrumpThreshold(m_Trumpcard.GetSuit())) {
 		std::cout << "The Dealer Team <--Team " << m_playersArray[m_dealerIndex].Team << "--> has confirmed the Trump:" << std::endl;
+		m_Trumpcard.SetSuit(m_playersArray[m_dealerIndex].FavoredSuit());
 		DisplayTrumpSuit(false);
 	}
 }
