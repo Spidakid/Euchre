@@ -28,7 +28,7 @@ void Game::Play()
 	//Deal cards clockwise from dealer
 	StartingDeal();	
 	//Assigns the top card to be a trump card 
-	m_Trumpcard = m_playersArray[m_dealerIndex].TopCardCopy();
+	m_Trumpcard = &m_playersArray[m_dealerIndex].TopCardCopy();
 
 	//Choosing the Trump Card
 	ChoosingTrump();
@@ -152,14 +152,14 @@ void Game::DisplayTrumpSuit(bool _showrank) const{
 	std::cout << "The Trump is:\n";
 	if (_showrank) {
 		std::cout << "\tRank: ";
-		m_Trumpcard.DisplayRank();
+		m_Trumpcard->DisplayRank();
 		std::cout << "; ";
 	}
 	else {
 		std::cout << "\t";
 	}
 	std::cout << "Suit: ";
-	m_Trumpcard.DisplaySuit();
+	m_Trumpcard->DisplaySuit();
 	std::cout << std::endl;
 }
 //Displays all player hands
@@ -184,12 +184,12 @@ void Game::ChoosingTrump() {
 		DisplayCurPlayerHand(Hand::s_turn);
 		DisplayTrumpSuit(true);
 		std::cout << "Player " << Hand::s_turn << ", Would you like this to be the Trump?\n";
-		if (m_playersArray[Hand::s_turn - 1].TrumpThreshold(m_Trumpcard.GetSuit())) {
+		if (m_playersArray[Hand::s_turn - 1].TrumpThreshold(m_Trumpcard->GetSuit())) {
 			std::cout << "\n\t\t\t-----Player " << Hand::s_turn << " confirmed the Trump-----"<<std::endl;
 			srand(time(0));
 			std::cout << "\t\t-----Player " << m_dealerIndex + 1 << " is replacing a card w/ the Trump-----"<<std::endl;
 			m_playersArray[m_dealerIndex].PlayCard(rand() % 4 + 1,true);
-			m_playersArray[m_dealerIndex].AddCard(&m_Trumpcard);
+			m_playersArray[m_dealerIndex].AddCard(m_Trumpcard);
 			DisplayTrumpSuit(false);
 			break;
 		}
@@ -205,7 +205,7 @@ void Game::ChoosingTrump() {
 	if (firstBidPass) 
 	{
 		std::cout << "The Dealer Team <--Team " << m_playersArray[m_dealerIndex].Team << "--> has confirmed the Trump:" << std::endl;
-		m_Trumpcard.SetSuit(m_playersArray[m_dealerIndex].FavoredSuit());
+		m_Trumpcard->SetSuit(m_playersArray[m_dealerIndex].FavoredSuit());
 		DisplayTrumpSuit(false);
 	}
 }
