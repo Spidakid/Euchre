@@ -6,7 +6,7 @@ class Dealer: public CanUseDeck, public Hand
 public:
 	Dealer();
 	Dealer(const Dealer& _dealer);
-	Dealer(Deck* _deck,int _player, bool _isdealer = false);
+	Dealer(Deck* _deck,int _player, bool _isdealer);
 	~Dealer();
 	//CanUseDeck Virtual methods
 	virtual void DealCards(Hand& _hand, int _cardstodeal);

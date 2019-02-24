@@ -1,5 +1,14 @@
 ﻿  Game.cpp
 c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(90): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(186): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(44): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(131): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(245): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(299): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(307): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(335): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(368): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(380): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(392): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(404): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+c:\users\spidakid\documents\reposgit\euchre\euchre\game.cpp(423): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Euchre.vcxproj -> C:\Users\Spidakid\Documents\ReposGit\Euchre\x64\Debug\Euchre.exe

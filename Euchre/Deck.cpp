@@ -65,9 +65,11 @@ std::vector<Card*>& Deck::GetDeck(){
 	return pile;
 }
 void Deck::FreeCardsMemory() {
-	for (std::vector<Card*>::iterator iter = pile.begin(); iter != pile.end();++iter) {
-		delete *iter;
-		*iter = 0;
+	for (int i = 0; i < pile.size();i++) {
+		if (i > 0) {
+			delete pile[i];
+		}
+		pile[i] = 0;
 	}
 	pile.clear();
 }

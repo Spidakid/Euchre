@@ -6,7 +6,7 @@ class Hand
 public:
 	//structors
 	Hand();
-	Hand(int _player,bool _isdealer = false);
+	Hand(int _player,bool _isdealer);
 	Hand(const Hand& _hand);
 	~Hand();
 
@@ -22,6 +22,7 @@ public:
 	//static
 	static int s_turn;
 	//variables
+	int tricks;
 	bool isDealer;
 	char Team;
 protected:

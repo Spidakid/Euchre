@@ -8,7 +8,7 @@ Dealer::Dealer() {
 }
 Dealer::Dealer(Deck* _deck,int _player, bool _isdealer) : Hand(_player, _isdealer), CanUseDeck(_deck,_isdealer)
 {
-	
+	isDealer = _isdealer;
 }
 Dealer::Dealer(const Dealer& _dealer) :Hand(_dealer){
 }

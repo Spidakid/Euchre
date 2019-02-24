@@ -7,13 +7,13 @@ Hand::Hand() {
 }
 Hand::Hand(int _playernumber,bool _isdealer)
 {
+	isDealer = _isdealer;
 	if (_playernumber < 0 || _playernumber > 4) {
 		m_player = 1;
 	}
 	else {
 		m_player = _playernumber;
 	}
-	isDealer = _isdealer;
 }
 int Hand::s_turn = 0;
 Hand::Hand(const Hand& _hand) {
@@ -70,7 +70,9 @@ int Hand::GetPlayerNumber() const {
 void Hand::FreeHandCardsMemory() {
 	for (std::vector<Card*>::iterator iter = hand.begin(); iter != hand.end(); ++iter)
 	{
-		delete *iter;
+		if (*iter != NULL) {
+			delete *iter;
+		}
 		*iter = 0;
 	}
 	hand.clear();
