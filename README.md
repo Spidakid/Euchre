@@ -1,2 +1,2 @@
 # Euchre
-C++ Euchre Card Game 
+C++ Euchre Card Game played only by AI.
